@@ -1,0 +1,10 @@
+<canvas
+    #board
+    width="450"
+    height="450"
+    (mousedown)="onMouseDown($event)"
+    (mousemove)="onMouseMove($event)"
+    (contextmenu)="$event.preventDefault()"
+    (mouseup)="onMouseUp($event)"
+    class="board-canvas">
+</canvas>
