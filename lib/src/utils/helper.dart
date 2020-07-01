@@ -33,6 +33,8 @@ List<double> inverse(List<double> input) {
   return res;
 }
 
+List<double> scale(List<double> input, int num) => input.map((f) => f/num).toList();
+
 List<double> mirrorVerticalInput(List<double> input) {
   final rotated = input.toList();
   for (var i = 0; i < 7; i++) {

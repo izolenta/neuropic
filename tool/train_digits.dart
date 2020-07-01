@@ -31,6 +31,11 @@ void main(List args) async {
       }
       result.add(TrainingData(inputArray, outputArray));
       result.add(TrainingData(inverse(inputArray), outputArray));
+      result.add(TrainingData(scale(inputArray, 2), outputArray));
+      result.add(TrainingData(inverse(scale(inputArray, 2)), outputArray));
+      result.add(TrainingData(scale(inputArray, 4), outputArray));
+      result.add(TrainingData(inverse(scale(inputArray, 4)), outputArray));
+
       var input2 = inputArray;
       var output2 = outputArray;
       for (var i = 0; i < 3; i++) {
@@ -38,6 +43,10 @@ void main(List args) async {
         output2 = turn90output(output2);
         result.add(TrainingData(input2, output2));
         result.add(TrainingData(inverse(input2), output2));
+        result.add(TrainingData(scale(input2, 2), output2));
+        result.add(TrainingData(inverse(scale(input2, 2)), output2));
+        result.add(TrainingData(scale(input2, 4), output2));
+        result.add(TrainingData(inverse(scale(input2, 4)), output2));
       }
     }
   }
