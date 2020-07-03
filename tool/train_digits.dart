@@ -5,7 +5,7 @@ import 'package:neuropic/src/utils/helper.dart';
 import 'package:perceptron/perceptron.dart';
 
 void main(List args) async {
-  final jsonData = File('traindata').readAsStringSync();
+  final jsonData = File('traindata3').readAsStringSync();
   final trainData = jsonDecode(jsonData) as List<dynamic>;
   final result = <TrainingData>[];
   for(var data in trainData) {
@@ -17,8 +17,6 @@ void main(List args) async {
       var outputArray = baseOutput;
       switch(k) {
         case 0:
-          inputArray = baseInput;
-          outputArray = baseOutput;
           break;
         case 1:
           inputArray = mirrorVerticalInput(baseInput);

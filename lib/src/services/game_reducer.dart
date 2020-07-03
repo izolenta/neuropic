@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:html';
 import 'dart:math';
 
+import 'package:neuropic/src/actions/calculate_angle_success_action.dart';
 import 'package:neuropic/src/actions/get_next_square_action.dart';
 import 'package:neuropic/src/actions/init_tool_action.dart';
 import 'package:neuropic/src/actions/init_tool_success_action.dart';
@@ -23,6 +24,7 @@ class GameReducer {
     _reducer = combineReducers([
       TypedReducer<GameState, InitToolSuccessAction>(_onInitToolSuccess),
       TypedReducer<GameState, GetNextSquareAction>(_onGetNextSquare),
+      TypedReducer<GameState, CalculateAngleSuccessAction>(_onAngleCalculated),
       TypedReducer<GameState, StoreTrainingDataAction>(_onStoreTrainingData),
     ]);
   }
@@ -40,8 +42,15 @@ class GameReducer {
   GameState _onGetNextSquare(GameState state, GetNextSquareAction action) =>
       state.rebuild((s) {
         s
+          ..angle = null
           ..imagePartX = rand.nextInt(state.image.width-7)
           ..imagePartY = rand.nextInt(state.image.height-7);
+      });
+
+  GameState _onAngleCalculated(GameState state, CalculateAngleSuccessAction action) =>
+      state.rebuild((s) {
+        s
+          ..angle = action.angle;
       });
 
   GameState _onStoreTrainingData(GameState state, StoreTrainingDataAction action) {

@@ -18,5 +18,8 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
 
   int get imagePartY;
 
+  @nullable
+  double get angle;
+
   List<TrainingData> get trainingData;
 }

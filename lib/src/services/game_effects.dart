@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:html';
 
+import 'package:neuropic/src/actions/calculate_angle_success_action.dart';
 import 'package:neuropic/src/actions/get_next_square_action.dart';
 import 'package:neuropic/src/actions/init_tool_action.dart';
 import 'package:neuropic/src/actions/init_tool_success_action.dart';
@@ -23,6 +24,7 @@ class GameEffects {
     return combineEpics([
       TypedEpic<GameState, InitToolAction>(_onInitTool),
       TypedEpic<GameState, InitToolSuccessAction>(_onInitToolSuccess),
+      TypedEpic<GameState, GetNextSquareAction>(_onGetNextSquare),
       TypedEpic<GameState, StoreTrainingDataAction>(_onStoreTrainingData),
     ]);
   }
@@ -42,6 +44,11 @@ class GameEffects {
   Stream<Object> _onInitToolSuccess(Stream<InitToolSuccessAction> actions, EpicStore<GameState> store) =>
       Observable(actions).asyncExpand((action) async* {
         yield GetNextSquareAction();
+      });
+
+  Stream<Object> _onGetNextSquare(Stream<GetNextSquareAction> actions, EpicStore<GameState> store) =>
+      Observable(actions).asyncExpand((action) async* {
+        yield CalculateAngleSuccessAction(_service.getAngle(_selector.getSquare(store.state)));
       });
 
   Stream<Object> _onStoreTrainingData(Stream<StoreTrainingDataAction> actions, EpicStore<GameState> store) =>

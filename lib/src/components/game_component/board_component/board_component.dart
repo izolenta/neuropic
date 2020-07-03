@@ -62,8 +62,26 @@ class BoardComponent implements AfterChanges {
       context.stroke();
     }
     if (!lazy && data != null) {
-      final angle = _service.getAngle(data);
-      print('angle: $angle');
+//      final angle = _service.getAngle(data);
+//      print('angle: $angle');
+      final foundAngle = _selector.getAngle(state);
+      print(foundAngle);
+      if (foundAngle != null) {
+        final na = 180 - foundAngle;
+        var strokeLen = 16;
+        final centerX = 20;
+        final centerY = 20;
+        final startX = centerX + strokeLen * cos(na * pi / 180);
+        final startY = centerY + strokeLen * sin(na * pi / 180);
+        final endX = centerX + strokeLen * cos(na * pi / 180+ pi);
+        final endY = centerY + strokeLen * sin(na * pi / 180 + pi);
+        context.beginPath();
+        context.lineWidth = 1;
+        context.setFillColorRgb(0, 0, 0);
+        context.moveTo(startX, startY);
+        context.lineTo(endX, endY);
+        context.stroke();
+      }
     }
   }
   
@@ -104,8 +122,8 @@ class BoardComponent implements AfterChanges {
       while (angle >= pi) {
         angle -= pi;
       }
-      angle = angle / pi * 180;
-      print('angle: $angle');
+      angle = 180 - angle / pi * 180;
+      print('drawn angle: $angle');
       _dispatcher.dispatch(StoreTrainingDataAction(convertAngleToOutput(angle)..add(1.0)));
     }
     else {

@@ -6,6 +6,7 @@ class GameSelector {
 
   CanvasElement _canvas;
 
+  double getAngle(GameState state) => state.angle;
 
   List<double> getSquare(GameState state) {
     if (_canvas == null && state.image.width != 0) {

@@ -14,13 +14,19 @@ class _$GameState extends GameState {
   @override
   final int imagePartY;
   @override
+  final double angle;
+  @override
   final List<TrainingData> trainingData;
 
   factory _$GameState([void Function(GameStateBuilder) updates]) =>
       (new GameStateBuilder()..update(updates)).build();
 
   _$GameState._(
-      {this.image, this.imagePartX, this.imagePartY, this.trainingData})
+      {this.image,
+      this.imagePartX,
+      this.imagePartY,
+      this.angle,
+      this.trainingData})
       : super._() {
     if (image == null) {
       throw new BuiltValueNullFieldError('GameState', 'image');
@@ -50,14 +56,17 @@ class _$GameState extends GameState {
         image == other.image &&
         imagePartX == other.imagePartX &&
         imagePartY == other.imagePartY &&
+        angle == other.angle &&
         trainingData == other.trainingData;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, image.hashCode), imagePartX.hashCode),
-            imagePartY.hashCode),
+        $jc(
+            $jc($jc($jc(0, image.hashCode), imagePartX.hashCode),
+                imagePartY.hashCode),
+            angle.hashCode),
         trainingData.hashCode));
   }
 
@@ -67,6 +76,7 @@ class _$GameState extends GameState {
           ..add('image', image)
           ..add('imagePartX', imagePartX)
           ..add('imagePartY', imagePartY)
+          ..add('angle', angle)
           ..add('trainingData', trainingData))
         .toString();
   }
@@ -87,6 +97,10 @@ class GameStateBuilder implements Builder<GameState, GameStateBuilder> {
   int get imagePartY => _$this._imagePartY;
   set imagePartY(int imagePartY) => _$this._imagePartY = imagePartY;
 
+  double _angle;
+  double get angle => _$this._angle;
+  set angle(double angle) => _$this._angle = angle;
+
   List<TrainingData> _trainingData;
   List<TrainingData> get trainingData => _$this._trainingData;
   set trainingData(List<TrainingData> trainingData) =>
@@ -99,6 +113,7 @@ class GameStateBuilder implements Builder<GameState, GameStateBuilder> {
       _image = _$v.image;
       _imagePartX = _$v.imagePartX;
       _imagePartY = _$v.imagePartY;
+      _angle = _$v.angle;
       _trainingData = _$v.trainingData;
       _$v = null;
     }
@@ -125,6 +140,7 @@ class GameStateBuilder implements Builder<GameState, GameStateBuilder> {
             image: image,
             imagePartX: imagePartX,
             imagePartY: imagePartY,
+            angle: angle,
             trainingData: trainingData);
     replace(_$result);
     return _$result;
